@@ -1,16 +1,7 @@
-/**
- * By default, Remix will handle generating the HTTP Response for you.
- * You are free to delete this file if you'd like to, but if you ever want it revealed again, you can run `npx remix reveal` ✨
- * For more information, see https://remix.run/file-conventions/entry.server
- */
-
 import type { AppLoadContext, EntryContext } from "@remix-run/cloudflare";
 import { RemixServer } from "@remix-run/react";
 import isbot from "isbot";
 import { renderToReadableStream } from "react-dom/server";
-import createEmotionCache from "./createEmotionCache";
-import { CacheProvider } from "@emotion/react";
-import { CssBaseline, CssVarsProvider } from "@mui/joy";
 
 export default async function handleRequest(
   request: Request,
@@ -19,15 +10,8 @@ export default async function handleRequest(
   remixContext: EntryContext,
   loadContext: AppLoadContext
 ) {
-  const cache = createEmotionCache();
-
   const body = await renderToReadableStream(
-    <CacheProvider value={cache}>
-      <CssVarsProvider>
-        <CssBaseline />
-        <RemixServer context={remixContext} url={request.url} />
-      </CssVarsProvider>
-    </CacheProvider>,
+    <RemixServer context={remixContext} url={request.url} />,
     {
       signal: request.signal,
       onError(error: unknown) {

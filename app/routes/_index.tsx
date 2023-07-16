@@ -1,4 +1,3 @@
-import { Box, Typography } from "@mui/joy";
 import type { V2_MetaFunction } from "@remix-run/cloudflare";
 
 export const meta: V2_MetaFunction = () => {
@@ -11,7 +10,7 @@ export const meta: V2_MetaFunction = () => {
 export default function Index() {
   return (
     <main>
-      <Typography level="h1">Hello, World!</Typography>
+      <h1>Hello, World!</h1>
     </main>
   );
 }
