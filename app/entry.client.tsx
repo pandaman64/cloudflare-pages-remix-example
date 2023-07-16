@@ -14,8 +14,8 @@ import {
   useState,
 } from "react";
 import { hydrateRoot } from "react-dom/client";
-import ClientStyleContext from "./src/ClientStyleContext";
-import createEmotionCache from "./src/createEmotionCache";
+import ClientStyleContext from "./ClientStyleContext";
+import createEmotionCache from "./createEmotionCache";
 import { CssBaseline, CssVarsProvider, ThemeProvider } from "@mui/joy";
 
 // https://github.com/mui/material-ui/blob/e6b4c22aac2e78cd5d4009d46ac3b0ec4b6cc26b/examples/material-remix-ts/app/entry.client.tsx
