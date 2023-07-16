@@ -9,7 +9,7 @@ import { Header } from "~/components/Header";
 
 export const meta: V2_MetaFunction = () => {
   return [
-    { title: "New Remix App" },
+    { title: "Cloudflare太郎" },
     { name: "description", content: "Welcome to Remix!" },
   ];
 };
@@ -30,8 +30,8 @@ export default function Index() {
   return (
     <>
       <Header name={data.name} />
-      <main className="container mx-auto">
-        <h1>Hello, {data.name}!</h1>
+      <main className="container mx-auto p-2">
+        <h1 className="text-4xl">Hello, {data.name}!</h1>
       </main>
     </>
   );
