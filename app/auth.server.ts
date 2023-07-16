@@ -24,8 +24,8 @@ export function getAuthenticator(context: AppLoadContext): Authenticator<User> {
           return {
             profile,
           };
-        }
-      )
+        },
+      ),
     );
   }
   return _authenticator;

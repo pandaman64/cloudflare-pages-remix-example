@@ -3,8 +3,9 @@ import {
   type ActionArgs,
   type V2_MetaFunction,
 } from "@remix-run/cloudflare";
-import { Form, useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
 import { getAuthenticator } from "~/auth.server";
+import { Header } from "~/components/Header";
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -27,14 +28,11 @@ export async function action({ request, context }: ActionArgs) {
 export default function Index() {
   const data = useLoaderData<typeof loader>();
   return (
-    <main>
-      <h1>Hello, {data.name}!</h1>
-      <Form action="/auth/google" method="post">
-        <button>Login with Google</button>
-      </Form>
-      <Form method="post">
-        <button>Logout</button>
-      </Form>
-    </main>
+    <>
+      <Header name={data.name} />
+      <main className="container mx-auto">
+        <h1>Hello, {data.name}!</h1>
+      </main>
+    </>
   );
 }
