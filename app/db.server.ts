@@ -17,45 +17,42 @@ export async function loginOrRegister(
   providerId: string,
   displayName: string,
 ): Promise<User> {
-  return await drizzle.transaction(async (tx) => {
-    const existingAssociation: // workaround for drizze typing bug
-    | {
-          userId: number;
-        }
-      | undefined = await tx
+  // It's unfortunate that D1 doesn't offer a flexible transaction API.
+  // Since this is just an toy app, we don't care about transaction.
+  const existingAssociation: // workaround for drizze typing bug
+  | {
+        userId: number;
+      }
+    | undefined = await drizzle
+    .select()
+    .from(idAssociation)
+    .where(
+      and(
+        eq(idAssociation.provider, provider),
+        eq(idAssociation.providerId, providerId),
+      ),
+    )
+    .get();
+  if (existingAssociation !== undefined) {
+    return await drizzle
       .select()
-      .from(idAssociation)
-      .where(
-        and(
-          eq(idAssociation.provider, provider),
-          eq(idAssociation.providerId, providerId),
-        ),
-      )
+      .from(users)
+      .where(eq(users.id, existingAssociation.userId))
       .get();
-    console.log("existingAssociation", existingAssociation);
-    if (existingAssociation !== undefined) {
-      return await tx
-        .select()
-        .from(users)
-        .where(eq(users.id, existingAssociation.userId))
-        .get();
-    }
-
-    // create a new user
-    const newUser: User = await tx
-      .insert(users)
-      .values({ displayName })
-      .returning({ id: users.id, displayName: users.displayName })
-      .get();
-    console.log("newUser", newUser);
-    await tx
-      .insert(idAssociation)
-      .values({
-        provider,
-        providerId,
-        userId: newUser.id,
-      })
-      .run();
-    return newUser;
-  });
+  }
+  // create a new user
+  const newUser: User = await drizzle
+    .insert(users)
+    .values({ displayName })
+    .returning({ id: users.id, displayName: users.displayName })
+    .get();
+  await drizzle
+    .insert(idAssociation)
+    .values({
+      provider,
+      providerId,
+      userId: newUser.id,
+    })
+    .run();
+  return newUser;
 }
