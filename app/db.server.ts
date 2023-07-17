@@ -33,6 +33,7 @@ export async function loginOrRegister(
           ),
         )
         .get();
+      console.log("existingAssociation", existingAssociation);
       if (existingAssociation !== undefined) {
         return await tx
           .select()
@@ -47,6 +48,7 @@ export async function loginOrRegister(
         .values({ displayName })
         .returning({ id: users.id, displayName: users.displayName })
         .get();
+      console.log("newUser", newUser);
       await tx
         .insert(idAssociation)
         .values({
