@@ -1,11 +1,13 @@
 import { type AppLoadContext } from "@remix-run/cloudflare";
 import { Authenticator } from "remix-auth";
 import { createSessionStorage } from "./sessions.server";
-import { type GoogleProfile, GoogleStrategy } from "remix-auth-google";
+import { GoogleStrategy } from "remix-auth-google";
 import { getEnv } from "./env";
+import { getDb, loginOrRegister } from "./db.server";
 
 export type User = {
-  profile: GoogleProfile;
+  id: number;
+  displayName: string;
 };
 
 let _authenticator: Authenticator<User> | undefined;
@@ -21,10 +23,13 @@ export function getAuthenticator(context: AppLoadContext): Authenticator<User> {
           callbackURL: env.GOOGLE_CALLBACK_URL,
         },
         async ({ profile }) => {
-          console.log(profile);
-          return {
-            profile,
-          };
+          const drizzle = getDb(context);
+          return await loginOrRegister(
+            drizzle,
+            "google",
+            profile.id,
+            profile.displayName,
+          );
         },
       ),
     );

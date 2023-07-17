@@ -1,15 +1,16 @@
 import { Form } from "@remix-run/react";
 import { Button } from "./Button";
+import type { User } from "~/auth.server";
 
 type Props = {
-  name?: string;
+  user: User | null;
 };
 
-export function Header({ name }: Props) {
+export function Header({ user }: Props) {
   return (
     <header className="container mx-auto flex flex-row p-2">
       <div className="ml-auto">
-        {name === undefined ? (
+        {user === null ? (
           <Form action="/auth/google" method="post">
             <Button>Login with Google</Button>
           </Form>
