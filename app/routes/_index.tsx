@@ -62,11 +62,13 @@ export default function Index() {
         <h1 className="text-4xl">Hello, {user?.displayName}!</h1>
         {postList}
         <div className="flex flex-row">
-          <div className="ml-auto">
-            <Form action="/posts/new">
-              <Button>新しい記事</Button>
-            </Form>
-          </div>
+          {user !== null ? (
+            <div className="ml-auto">
+              <Form action="/posts/new">
+                <Button>新しい記事</Button>
+              </Form>
+            </div>
+          ) : null}
         </div>
       </main>
     </>
