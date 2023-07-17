@@ -1,6 +1,12 @@
-# Welcome to Remix!
+# A private note app with Cloudflare Workers + D1 + Remix + PWA
 
-- [Remix Docs](https://remix.run/docs)
+This is an example of a private note app built with
+
+- Cluodflare Workers as the Edge runtime
+- Cloudflare D1
+- Remix
+- PWA via remix-pwa
+- Google authentication via remix-auth
 
 ## Development
 
