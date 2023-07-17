@@ -14,7 +14,7 @@ export function Header({ name }: Props) {
             <Button>Login with Google</Button>
           </Form>
         ) : (
-          <Form method="post">
+          <Form action="/auth/logout" method="post">
             <Button>Logout</Button>
           </Form>
         )}

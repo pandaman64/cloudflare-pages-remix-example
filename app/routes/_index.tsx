@@ -20,11 +20,6 @@ export async function loader({ request, context }: ActionArgs) {
   return json({ name: user?.profile?.displayName });
 }
 
-export async function action({ request, context }: ActionArgs) {
-  const authenticator = getAuthenticator(context);
-  await authenticator.logout(request, { redirectTo: "/" });
-}
-
 export default function Index() {
   const data = useLoaderData<typeof loader>();
   return (
