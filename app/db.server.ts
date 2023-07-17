@@ -7,7 +7,7 @@ import type { User } from "./auth.server";
 
 export function getDb(context: AppLoadContext) {
   return drizzle(getEnv(context).DB, {
-    logger: process.env.NODE_ENV !== "production",
+    logger: true,
   });
 }
 
