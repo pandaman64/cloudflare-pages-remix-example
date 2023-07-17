@@ -1,4 +1,5 @@
 import {
+  index,
   integer,
   primaryKey,
   sqliteTable,
@@ -21,5 +22,20 @@ export const idAssociation = sqliteTable(
   },
   (table) => ({
     pk: primaryKey(table.provider, table.providerId),
+  }),
+);
+
+export const posts = sqliteTable(
+  "posts",
+  {
+    id: integer("id").primaryKey({ autoIncrement: true }),
+    userId: integer("user_id")
+      .notNull()
+      .references(() => users.id),
+    title: text("title").notNull(),
+    body: text("body").notNull(),
+  },
+  (table) => ({
+    indexByUser: index("user_id_idx").on(table.userId),
   }),
 );
