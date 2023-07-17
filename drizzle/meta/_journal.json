@@ -1,0 +1,13 @@
+{
+  "version": "5",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1689568996184,
+      "tag": "0000_stormy_princess_powerful",
+      "breakpoints": true
+    }
+  ]
+}

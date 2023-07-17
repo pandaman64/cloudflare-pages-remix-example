@@ -6,6 +6,7 @@ node_modules
 /functions/\[\[path\]\].js.map
 /public/build
 .dev.vars
+.wrangler
 
 result
 .direnv

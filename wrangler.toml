@@ -1,0 +1,7 @@
+compatibility_date = "2023-06-21"
+compatibility_flags = []
+
+[[d1_databases]]
+binding = "DB" # i.e. available in your Worker on env.DB
+database_name = "cloudflare-pages-remix-example-db"
+database_id = "1303e7ab-69f4-4717-8042-fe29ceba643e"
