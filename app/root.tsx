@@ -1,3 +1,4 @@
+import { useSWEffect } from "@remix-pwa/sw";
 import type { LinksFunction } from "@remix-run/cloudflare";
 import { cssBundleHref } from "@remix-run/css-bundle";
 import {
@@ -8,15 +9,16 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-
 import styles from "./tailwind.css";
 
 export const links: LinksFunction = () => [
+  { rel: "manifest", href: "/resources/manifest.webmanifest" },
   { rel: "stylesheet", href: styles },
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
 ];
 
 export default function App() {
+  useSWEffect();
   return (
     <html lang="en">
       <head>

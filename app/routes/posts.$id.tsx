@@ -1,7 +1,7 @@
-import type { ActionArgs} from "@remix-run/cloudflare";
+import type { ActionArgs } from "@remix-run/cloudflare";
 import { json, redirect } from "@remix-run/cloudflare";
 import { Link, useLoaderData } from "@remix-run/react";
-import type { InferModel} from "drizzle-orm";
+import type { InferModel } from "drizzle-orm";
 import { and, eq } from "drizzle-orm";
 import { getAuthenticator } from "~/auth.server";
 import { getDb } from "~/db.server";

@@ -5,6 +5,7 @@ node_modules
 /functions/\[\[path\]\].js
 /functions/\[\[path\]\].js.map
 /public/build
+/public/entry.workbox.js
 .dev.vars
 .wrangler
 
